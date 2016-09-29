@@ -1,0 +1,44 @@
+{% extends 'students/base.html' %}
+{% block title %} student_details {% endblock %}
+
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-md-4">            
+            <h3>{{ title }}</h3>
+            <hr />
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                
+                    {% if instance.student_photo %}
+                        <img src='{{ instance.student_photo.url }}' class='img-responsive' />
+                    {% else %}
+                        No Photo to Display
+                    {% endif %}
+                    
+                </div>
+            </div><!-- panel -->
+        </div><!-- /col -->
+        
+        
+        <div class="col-md-6">            
+            <p style="margin-top: 115px;"></p>
+            <hr />
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                
+                <h4>Name: {{ instance.first_name}}  {{ instance.last_name }}</h4>
+                <p>Email: {{ instance.email }}</p>
+                <p>Gender: {{ instance.gender }}</p>
+                <p>School: {{ instance.school }}</p>
+                <p>Course: {{ instance.course }}</p>
+                <p>Registered: {{ instance.registered_timestamp }}</p>
+                <p>Enrollment Class: {{ instance.Student_Enrollment_Class }}</p>
+                    
+                </div>
+            </div><!-- panel -->
+        </div><!-- /col -->
+    </div><!-- /row -->
+    
+{% endblock %}

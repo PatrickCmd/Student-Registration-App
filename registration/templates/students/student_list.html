@@ -1,0 +1,81 @@
+{% extends 'students/base.html' %}
+{% block title %}student lists{% endblock %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    <!--Student ModalForm -->
+    {% include 'students/createModal.html' %}
+
+    <div class="row">
+        <div class="col-md-12">           
+            
+            
+                <h1 class="heading">{{ heading }}</h1>
+                <hr />
+                
+                <div class=''>
+                    <a type='button' class='btn btn-primary' href='{% url "students:create_student" %}'>Add Student</a><br /><br />
+                </div>
+                    
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <table id='students' class='table table-bordered table-hover'>
+                                <!--<caption><strong>{{ heading }}</strong></caption>-->
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <!--<th>Year</th>-->
+                                        <th>School</th>
+                                        <th>Course</th>
+                                        <th>Registered</th>
+                                        <th>Photo</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            
+                                <tbody>
+                                    {% for student in students %}                                
+                                        <tr>
+                                            <td>{{ student.id }}</td>
+                                            <td>{{ student.first_name }}</td>
+                                            <td>{{ student.last_name }}</td>
+                                            <td>{{ student.gender }}</td>
+                                            <td>{{ student.email }}</td>
+                                            <!--<td>{{ student.year }}</td>-->
+                                            <td>{{ student.school }}</td>
+                                            <td>{{ student.course }}</td>
+                                            <td>{{ student.registered_timestamp }}</td>
+                                            <td>
+                                                {% if student.student_photo %}
+                                                    <img src="{{ student.student_photo.url }}" class="img-responsive img-circle" style="width: 40px;" />
+                                                {% else %}
+                                                    No Student Photo
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" href="{{ student.get_absolute_url }}" title="View Details"> <i class='fa fa-comments fa-fw'></i> </a>
+                                                <a class="btn btn-info btn-xs" href="{{ student.get_edit_url }}" title="Edit"> <i class='fa fa-pencil fa-fw'> </i></a>
+                                                <a class="btn btn-danger btn-xs" href="{{ student.get_delete_url }}" title="Delete"><i class='fa fa-trash fa-fw'></i></a>
+                                            </td>
+                                        </tr>
+                                    
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /Panel -->
+                    
+                                
+        </div>
+    </div>
+
+{% endblock %}
+                
+                
+            
